@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
-import { DragDropContext, Draggable , Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable } from 'react-beautiful-dnd';
 import {StrictModeDroppable} from './StrictModeDroppable';
 
 const finalSpaceCharacters = [
@@ -28,7 +28,7 @@ function App() {
       <header className="App-header">
         <h1>Final Space Characters</h1>
         <DragDropContext>
-          <Droppable droppableId='characters'>
+          <StrictModeDroppable droppableId='characters'>
             {(provided)=>(
             <ul className="characters" 
             {...provided.droppableProps}
@@ -54,7 +54,7 @@ function App() {
               }
               {provided.placeholder}
             </ul>)}
-          </Droppable>
+          </StrictModeDroppable>
         </DragDropContext>
       </header>
     </div>
