@@ -6,7 +6,7 @@ import {StrictModeDroppable} from './StrictModeDroppable';
 
 const finalSpaceCharacters = [
   {
-    id: 'gray',
+    id: 'gary',
     name: 'Gary Goodspeed'
   },
   {
@@ -23,11 +23,23 @@ function App() {
 
   const [characters, setCharacters] = useState(finalSpaceCharacters);
 
+  const handleEnd =(result)=>{
+    console.log(result);
+    //result 매개변수에는 source 및 destination 와 같은 드래그 이벤트가 포함되어 있다.
+
+    if(!result.destination) return;
+
+    const items = Array.from(characters);
+    const [reorderedItems] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItems);
+    setCharacters(items);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Final Space Characters</h1>
-        <DragDropContext>
+        <DragDropContext onDragEnd={handleEnd}>
           <StrictModeDroppable droppableId='characters'>
             {(provided)=>(
             <ul className="characters" 
